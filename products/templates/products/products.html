@@ -54,7 +54,7 @@
             <h1 class="my-4">{{ header }}</h1>
             <div class="list-group">
                 {% for item in listLink %}
-                    <a href="#" class="list-group-item"> {{ item }} </a>
+                <a href="#" class="list-group-item"> {{ item|capfirst }} </a>
                 {% endfor %}
 
             </div>
@@ -141,7 +141,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; GeekShop 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; GeekShop {% now "Y" %}</p>
     </div>
     <!-- /.container -->
 </footer>
