@@ -21,6 +21,6 @@ def products(request):
     title = 'GeekShop - Каталог'
     header = 'GeekShop'
     list_link = ProductCategory.objects.all()
-    goods = Product.objects.all()
-    content = {'title': title, 'header': header, 'list_link': list_link, 'goods': goods}
+    products = Product.objects.all()
+    content = {'title': title, 'header': header, 'list_link': list_link, 'products': products}
     return render(request, 'products/products.html', content)
