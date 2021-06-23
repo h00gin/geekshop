@@ -14,12 +14,6 @@ def index(request):
     return render(request, 'admins/admin.html')
 
 
-# @user_passes_test(lambda u: u.is_superuser)
-# def admin_users(request):
-#     context = {'title': 'GeekShop - Админ | Пользователи', 'users': User.objects.all()}
-#     return render(request, 'admins/admin-users-read.html', context)
-
-
 class UserListView(ListView):
     model = User
     template_name = 'admins/admin-users-read.html'
@@ -40,6 +34,11 @@ class UserCreateView(CreateView):
     form_class = UserAdminRegisterForm
     success_url = reverse_lazy('admins:admin_users')
 
+    def get_context_data(self, **kwargs):
+        context = super(UserCreateView, self).get_context_data(**kwargs)
+        context['title'] = 'GeekShop - Админ | Регистрация'
+        return context
+
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
         return super(UserCreateView, self).dispatch(request, *args, **kwargs)
@@ -50,6 +49,11 @@ class UserUpdateView(UpdateView):
     template_name = 'admins/admin-users-update-delete.html'
     form_class = UserAdminProfileForm
     success_url = reverse_lazy('admins:admin_users')
+
+    def get_context_data(self, **kwargs):
+        context = super(UserUpdateView, self).get_context_data(**kwargs)
+        context['title'] = 'Админ | Обновление пользователя'
+        return context
 
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, request, *args, **kwargs):
