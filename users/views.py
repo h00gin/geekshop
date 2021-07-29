@@ -75,13 +75,13 @@ def verify(request, email, activation_key):
             user.is_active = True
             user.save()
             auth.login(request, user)
-            return render(request, 'users/verify.html')
+        return render(request, 'users/verify.html')
     return HttpResponseRedirect(reverse('index'))
 
 
 def send_verify_mail(user):
     subject = 'Verify your account'
-    link = reverse('auth:verify', args=[user.email, user.activation_key])
+    link = reverse('users:verify', args=[user.email, user.activation_key])
     message = f'{settings.DOMAIN}{link}'
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
