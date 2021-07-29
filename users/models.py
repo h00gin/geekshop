@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+import pytz
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -12,7 +14,7 @@ class User(AbstractUser):
 
 
     def is_activation_key_expired(self):
-        if datetime.now() < self.activation_key_created + timedelta(hours=48):
+        if datetime.now(pytz.timezone(settings.TIME_ZONE)) < (self.activation_key_created + timedelta(hours=48)):
             return False
         return True
 

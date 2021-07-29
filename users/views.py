@@ -7,6 +7,7 @@ from django.conf import settings
 
 from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm
 from baskets.models import Basket
+from users.models import User
 
 
 def login(request):
@@ -67,13 +68,20 @@ def logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-def verify(request):
-    pass
+def verify(request, email, activation_key):
+    user = User.objects.filter(email=email).first()
+    if user:
+        if user.activation_key == activation_key and not user.is_activation_key_expired():
+            user.is_active = True
+            user.save()
+            auth.login(request, user)
+            return render(request, 'users/verify.html')
+    return HttpResponseRedirect(reverse('index'))
 
 
 def send_verify_mail(user):
     subject = 'Verify your account'
-    link = reverse('users:verify', args=[user.email, user.activation_key])
+    link = reverse('auth:verify', args=[user.email, user.activation_key])
     message = f'{settings.DOMAIN}{link}'
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 

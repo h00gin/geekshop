@@ -133,7 +133,7 @@ AUTH_USER_MODEL = 'users.User'
 
 LOGIN_URL = '/users/login/'
 
-DOMAIN = 'http://127.0.0.1:8000/'
+DOMAIN = 'http://127.0.0.1:8000'
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
