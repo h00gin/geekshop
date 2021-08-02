@@ -5,9 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-from products.views import get_basket
 from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm
-from baskets.models import Basket
 from users.models import User
 
 
@@ -59,7 +57,6 @@ def profile(request):
     context = {
         'title': 'GeekShop - Личный кабинет',
         'form': form,
-        'baskets': get_basket(request.user),
     }
     return render(request, 'users/profile.html', context)
 
