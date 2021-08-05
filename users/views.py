@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 
-from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm
+from users.forms import UserLoginForm, UserRegisterForm, UserProfileForm, ShopUserProfileEdit
 from users.models import User
 
 
@@ -47,16 +47,19 @@ def profile(request):
     user = request.user
     if request.method == 'POST':
         form = UserProfileForm(data=request.POST, files=request.FILES, instance=user)
-        if form.is_valid():
+        profile_form = ShopUserProfileEdit(request.POST, instance=request.user.shopuserprofile)
+        if form.is_valid() and profile_form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('users:profile'))
         else:
             print(form.errors)
     else:
         form = UserProfileForm(instance=user)
+        profile_form = ShopUserProfileEdit(instance=request.user.shopuserprofile)
     context = {
         'title': 'GeekShop - Личный кабинет',
         'form': form,
+        'profile_form': profile_form
     }
     return render(request, 'users/profile.html', context)
 

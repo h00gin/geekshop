@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Verify your account
+From: django@gb.local
+To: egor@yandex.ru
+Date: Thu, 05 Aug 2021 18:30:43 -0000
+Message-ID: <162818824366.6580.11833594994870068764@Lenovo>
+
+http://127.0.0.1:8000/users/verify/egor@yandex.ru/9f498c222e8a13f332c4d5b214472eb68e496291/
+-------------------------------------------------------------------------------
