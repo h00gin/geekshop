@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'baskets',
     'admins',
+    'ordersapp',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,10 @@ TEMPLATES = [
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
             ],
+            'libraries': {
+                'my_tags': 'admins.templatetags.my_tags',
+
+            }
         },
     },
 ]
