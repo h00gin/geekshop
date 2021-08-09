@@ -5,7 +5,6 @@ window.onload = function () {
     var price_arr = [];
 
     var TOTAL_FORMS = parseInt($('input[name="orderitems-TOTAL_FORMS"]').val());
-    console.log(TOTAL_FORMS);
     var order_total_quantity = parseInt($('.order_total_quantity').text()) || 0;
     var order_total_cost = parseFloat($('.order_total_cost').text().replace(',', '.')) || 0;
 
@@ -54,5 +53,20 @@ window.onload = function () {
 
         $('.order_total_quantity').html(order_total_quantity);
         $('.order_total_cost').html(order_total_cost);
+    }
+
+    $('.formset_row').formset({
+        addText: 'добавить товар',
+        deleteText: 'удалить',
+        prefix: 'orderitems',
+        removed: deleteOrderItem
+    });
+
+    function deleteOrderItem(row){
+        var target_name= row[0].querySelector('input[type="number"]').name;
+        orderitem_num = parseInt(target_name.replace('orderitems-', '').replace('-quantity', ''));
+        delta_quantity = -quantity_arr[orderitem_num];
+        orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
+
     }
 }
