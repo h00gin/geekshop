@@ -1,4 +1,4 @@
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, render
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
 from django.http import JsonResponse
@@ -37,9 +37,7 @@ def basket_edit(request, id, quantity):
             basket.save()
         else:
             basket.delete()
-        baskets = Basket.objects.filter(user=request.user)
-        context = {'baskets': baskets}
-        result = render_to_string('baskets/baskets.html', context)
+        result = render_to_string('baskets/baskets.html')
         return JsonResponse({'result': result})
 
 

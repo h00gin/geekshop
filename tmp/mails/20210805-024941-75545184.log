@@ -1,0 +1,11 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Subject: Verify your account
+From: django@gb.local
+To: s@ya.ru
+Date: Wed, 04 Aug 2021 23:49:41 -0000
+Message-ID: <162812098163.5116.5551185688551223421@Lenovo>
+
+http://127.0.0.1:8000/users/verify/s@ya.ru/eab9f889778e861ef54df4faca438832a7fb4fdf/
+-------------------------------------------------------------------------------

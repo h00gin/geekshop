@@ -41,6 +41,9 @@
                             <i class="fas fa-user-circle"></i>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'ordersapp:orders_list' %}">Заказы</a>
+                    </li>
                     {% if user.is_staff or user.is_superuser %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'admins:index' %}">
@@ -56,6 +59,15 @@
                         <a class="nav-link" href="{% url 'users:login' %}">Войти <i class="fas fa-sign-in-alt"></i></a>
                     </li>
                 {% endif %}
+                <li>
+                    <a class="nav-link" href="{% url 'users:profile' %}">Корзина <i class="basket"></i>
+                        <span>
+                            {% if baskets %}
+                                {{ baskets.0.total_sum|floatformat:0 }} руб ({{ baskets.0.total_quantity }} шт)
+                            {% endif %}
+                        </span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
