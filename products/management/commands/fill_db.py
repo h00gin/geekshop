@@ -6,7 +6,7 @@ from django.core.management.base import BaseCommand
 
 from products.models import ProductCategory, Product
 
-JSON_PATH = 'mainapp/json'
+JSON_PATH = 'products/fixtures'
 
 
 def load_from_json(file_name):
@@ -23,7 +23,7 @@ class Command(BaseCommand):
             new_category = ProductCategory(**category)
             new_category.save()
 
-        products = load_from_json('products')
+        products = load_from_json('goods')
 
         Product.objects.all().delete()
         for product in products:
