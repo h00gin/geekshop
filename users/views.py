@@ -54,8 +54,9 @@ def profile(request):
         else:
             print(form.errors)
     else:
+        queryset = user.shopuserprofile.select_related()
         form = UserProfileForm(instance=user)
-        profile_form = ShopUserProfileEdit(instance=request.user.shopuserprofile)
+        profile_form = ShopUserProfileEdit(instance=request.user.shopuserprofile, queryset=queryset)
     context = {
         'title': 'GeekShop - Личный кабинет',
         'form': form,
