@@ -18,8 +18,7 @@ def index(request):
 
 def products(request, category_id=None, page=1):
     context = {'header': 'GeekShop', 'title': 'GeekShop - Каталог', 'categories': ProductCategory.objects.all()}
-    products = Product.objects.filter(category_id=category_id).select_related()[:3] \
-        if category_id else Product.objects.all()
+    products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
     paginator = Paginator(products, 3)
     try:
         products_paginator = paginator.page(page)
