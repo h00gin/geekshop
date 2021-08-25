@@ -25,32 +25,30 @@ class Basket(models.Model):
     def __str__(self):
         return f'Корзина для {self.user.username} | Продукт {self.product.name}'
 
-    def sum_1(self):
+    def sum(self):
         return self.quantity * self.product.price
 
-    product_cost = property(sum_1)
+    # product_cost = property(sum_1)
 
-    @cached_property
-    def get_items_cached(self):
-        return Basket.objects.filter(user=self.user).select_related()
-
-    def total_quantity(self):
-        _items = self.get_items_cached
-        return sum(list(map(lambda x: x.quantity, _items)))
-
-    def total_sum(self):
-        _items = self.get_items_cached
-        return sum(list(map(lambda x: x.product_cost, _items)))
-
-
+    # @cached_property
+    # def get_items_cached(self):
+    #     return Basket.objects.filter(user=self.user).select_related()
     #
     # def total_quantity(self):
-    #     baskets = Basket.objects.filter(user=self.user)
-    #     return sum(basket.quantity for basket in baskets)
+    #     _items = self.get_items_cached
+    #     return sum(list(map(lambda x: x.quantity, _items)))
     #
     # def total_sum(self):
-    #     baskets = Basket.objects.filter(user=self.user)
-    #     return sum(basket.sum() for basket in baskets)
+    #     _items = self.get_items_cached
+    #     return sum(list(map(lambda x: x.product_cost, _items)))
+
+    def total_quantity(self):
+        baskets = Basket.objects.filter(user=self.user)
+        return sum(basket.quantity for basket in baskets)
+
+    def total_sum(self):
+        baskets = Basket.objects.filter(user=self.user)
+        return sum(basket.sum() for basket in baskets)
     #
 
     # def delete(self):
