@@ -25,10 +25,10 @@ class Basket(models.Model):
     def __str__(self):
         return f'Корзина для {self.user.username} | Продукт {self.product.name}'
 
-    def sum(self):
+    def sum_1(self):
         return self.quantity * self.product.price
 
-    product_cost = property(sum)
+    product_cost = property(sum_1)
 
     @cached_property
     def get_items_cached(self):
