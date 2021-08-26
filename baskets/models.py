@@ -30,9 +30,9 @@ class Basket(models.Model):
 
     # product_cost = property(sum_1)
 
-    # @cached_property
-    # def get_items_cached(self):
-    #     return Basket.objects.filter(user=self.user).select_related()
+    @cached_property
+    def get_items_cached(self):
+        return Basket.objects.filter(user=self.user).select_related()
     #
     # def total_quantity(self):
     #     _items = self.get_items_cached
