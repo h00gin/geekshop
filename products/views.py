@@ -32,7 +32,7 @@ def index(request):
 
 def products(request, category_id=None, page=1):
     links_menu = get_links_menu()
-    context = {'header': 'GeekShop', 'title': 'GeekShop - Каталог', 'categories': ProductCategory.objects.all()}
+    context = {'header': 'GeekShop', 'title': 'GeekShop - Каталог', 'links_menu': links_menu, 'categories': ProductCategory.objects.all()}
     products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
     paginator = Paginator(products, 3)
     try:
