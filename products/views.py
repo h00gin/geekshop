@@ -18,6 +18,30 @@ def get_links_menu():
         return ProductCategory.objects.filter(is_active=True)
 
 
+def get_products():
+    if settings.LOW_CACHE:
+        key = 'products_list'
+        products_list = cache.get(key)
+        if products_list is None:
+            products_list = Product.objects.all()
+            cache.set(key, products_list)
+        return products_list
+    else:
+        return Product.objects.all()
+
+
+def get_products_by_category(pk):
+    if settings.LOW_CACHE:
+        key = f'products_by_category_pk_{pk}'
+        products_list = cache.get(key)
+        if products_list is None:
+            products_list = Product.objects.filter(category__pk=pk)
+            cache.set(key, products_list)
+        return products_list
+    else:
+        return Product.objects.filter(category__pk=pk)
+
+
 def index(request):
     context = {
         'title': 'GeekShop',
@@ -33,7 +57,8 @@ def index(request):
 def products(request, category_id=None, page=1):
     links_menu = get_links_menu()
     context = {'header': 'GeekShop', 'title': 'GeekShop - Каталог', 'links_menu': links_menu, 'categories': ProductCategory.objects.all()}
-    products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+    # products = Product.objects.filter(category_id=category_id) if category_id else Product.objects.all()
+    products = get_products_by_category(category_id) if category_id else get_products()
     paginator = Paginator(products, 3)
     try:
         products_paginator = paginator.page(page)
