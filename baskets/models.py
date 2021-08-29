@@ -33,15 +33,7 @@ class Basket(models.Model):
     @cached_property
     def get_items_cached(self):
         return Basket.objects.filter(user=self.user).select_related()
-    #
-    # def total_quantity(self):
-    #     _items = self.get_items_cached
-    #     return sum(list(map(lambda x: x.quantity, _items)))
-    #
-    # def total_sum(self):
-    #     _items = self.get_items_cached
-    #     return sum(list(map(lambda x: x.product_cost, _items)))
-
+   
     def total_quantity(self):
         baskets = self.get_items_cached
         return sum(basket.quantity for basket in baskets)
