@@ -4,7 +4,7 @@ from products.models import ProductCategory, Product
 
 
 class MainAppSmokeTest(TestCase):
-    status_code_success = 200
+    status_code_success = 305
     
     def setUp(self):
         category = ProductCategory.objects.create(
