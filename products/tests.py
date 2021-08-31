@@ -14,6 +14,7 @@ class MainAppSmokeTest(TestCase):
             Product.objects.create(
                 category=category,
                 name=f'prod{i}',
+                price=i,
             )
         self.client = Client()
 
