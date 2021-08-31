@@ -16,6 +16,7 @@ class MainAppSmokeTest(TestCase):
                 category=category,
                 name=f'prod{i}',
                 price=i+1,
+                image='img1',
             )
         self.client = Client()
 
@@ -23,7 +24,7 @@ class MainAppSmokeTest(TestCase):
         response = self.client.get('/')
         self.assertEqual(response.status_code, self.status_code_success)
 
-        response = self.client.get(reverse('products'))
+        response = self.client.get('/products/')
         self.assertEqual(response.status_code, self.status_code_success)
 
     def test_products_list(self):
