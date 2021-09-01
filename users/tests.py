@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 
-from geekshop import settings
+from django.conf import settings
 from users.models import User
 
 
