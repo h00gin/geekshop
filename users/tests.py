@@ -45,11 +45,12 @@ class UserAuthTestCase(TestCase):
             'username': 'django3',
             'email': 'django3@yandex.ru',
             'password1': self.user_password,
-            'password2': self.user_password
+            'password2': self.user_password,
+            'image': 'img1'
         }
 
         response = self.client.post('/users/register/', data=new_user_data)
-        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.status_code, self.status_code_redirect)
 
         new_user = User.objects.get(username=new_user_data['username'])
 
