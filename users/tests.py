@@ -62,7 +62,7 @@ class UserAuthTestCase(TestCase):
 
         response = self.client.get('/')
         self.assertEqual(response.status_code, self.status_code_success)
-        self.assertContains(response, f'{self.username}', status_code=self.status_code_success)
+        self.assertContains(response, f"{new_user_data['username']}", status_code=self.status_code_success)
 
 
 
