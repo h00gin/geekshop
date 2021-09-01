@@ -56,13 +56,19 @@ class UserAuthTestCase(TestCase):
 
         new_user = User.objects.get(username=new_user_data['username'])
 
-        activation_url = f"{settings.DOMAIN_NAME}/users/verify/{new_user_data['email']}/{new_user.activation_key}"
+        activation_url = f"{settings.DOMAIN}/users/verify/{new_user_data['email']}/{new_user.activation_key}"
         response = self.client.get(activation_url)
         self.assertEqual(response.status_code, self.status_code_success_redirect)
 
-        response = self.client.get('/')
+        self.client.login(username=new_user_data['username'], password=new_user_data['password1'])
+
+        response = self.client.get('/users/login/')
         self.assertEqual(response.status_code, self.status_code_success)
-        self.assertContains(response, f"{new_user_data['username']}", status_code=self.status_code_success)
+        self.assertFalse(response.context['user'].is_anonymous)
+
+        response = self.client.get('/')
+        self.assertContains(response, text=new_user_data['first_name'], status_code=self.status_code_success)
+
 
 
 
