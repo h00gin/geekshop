@@ -49,7 +49,7 @@ class UserAuthTestCase(TestCase):
         }
 
         response = self.client.post('/users/register/', data=new_user_data)
-        self.assertEqual(response.status_code, self.status_code_success)
+        self.assertEqual(response.status_code, self.status_code_redirect)
 
         new_user = User.objects.get(username=new_user_data['username'])
 
