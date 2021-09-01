@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 
-from geekshop import settings
+from django.conf import settings
 from users.models import User
 
 
@@ -43,9 +43,11 @@ class UserAuthTestCase(TestCase):
     def test_register_user(self):
         new_user_data = {
             'username': 'django3',
-            'email': 'django3@yandex.ru',
+            'first_name': 'Джанго',
+            'last_name': 'Бонго',
             'password1': self.user_password,
             'password2': self.user_password,
+            'email': 'sumuel@geekshop.local',
             'image': 'img1'
         }
 
