@@ -31,8 +31,8 @@ class ProductsTestCase(TestCase):
     def test_product_print(self):
         product_1 = Product.objects.get(name="Худи")
         product_2 = Product.objects.get(name="Куртка")
-        self.assertEqual(str(product_1), 'Худи (Одежда)')
-        self.assertEqual(str(product_2), 'Куртка (Одежда)')
+        self.assertEqual(str(product_1), 'Худи | Одежда')
+        self.assertEqual(str(product_2), 'Куртка | Одежда')
 
     def test_product_get_items(self):
         product_1 = Product.objects.get(name="Худи")
