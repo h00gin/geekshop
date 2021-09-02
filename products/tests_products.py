@@ -34,9 +34,9 @@ class ProductsTestCase(TestCase):
         self.assertEqual(str(product_1), 'Худи | Одежда')
         self.assertEqual(str(product_2), 'Куртка | Одежда')
 
-    # def test_product_get_items(self):
-    #     product_1 = Product.objects.get(name="Худи")
-    #     product_3 = Product.objects.get(name="Брюки")
-    #     products = product_1.get_items()
-    #
-    #     self.assertEqual(list(products), [product_1, product_3])
+    def test_product_get_items(self):
+        product_1 = Product.objects.get(name="Худи")
+        product_3 = Product.objects.get(name="Брюки")
+        products = product_1.items()
+
+        self.assertEqual(list(products), [product_1, product_3])
